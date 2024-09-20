@@ -27,11 +27,18 @@ function App() {
     setUser({})
   }
   console.log(list)
+  let deletHand=(i)=>{
+    list.splice(i,1)
+    let newList=[...list]
+    sessionStorage.setItem('user',JSON.stringify(newList))
+    setList(newList)  }
+  
 
 return(
   <>
+  <h2>sesion storage</h2>
        <form onSubmit={handleSubmit} >
-        <table>
+        <table align="center">
         <div>
           <td>Name:</td>
           <input
@@ -63,11 +70,11 @@ return(
           />
         </div>
         <div>
-          <td>Hobby:</td>
+          <td>Phone:</td>
           <input
             type="text"
-            name="hobby"
-            value={user.hobby?user.hobby:""}
+            name="Phone"
+            value={user.Phone?user.Phone:""}
             onChange={(e)=>inputHandle(e)}
             required
           />
@@ -92,6 +99,8 @@ return(
         <td>name</td>
         <td>email</td>
         <td>address</td>
+        <td>Phone</td>
+        <td>Action</td>
       </tr>
       {list.map((val,i)=>{
         console.log(val)
@@ -100,6 +109,8 @@ return(
          <td>{val.name}</td>
         <td>{val.email}</td>
         <td>{val.address}</td>
+        <td>{val.Phone}</td>
+        <td><button onClick={()=>deletHand(i)}>delete</button></td>
        </tr>
         )
        
